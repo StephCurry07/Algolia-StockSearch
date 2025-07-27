@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# Learn Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack JavaScript application with a React frontend and a Node.js (Bun-compatible) backend. Styled with Tailwind CSS.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Frontend](#frontend)
+- [Backend](#backend)
+- [Environment Variables](#environment-variables)
+- [Testing](#testing)
+- [License](#license)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React frontend (in `src/`)
+- Node.js backend (in `backend/`)
+- Tailwind CSS for styling
+- Algolia integration (planned or in progress)
+- Easy local development
 
-### `npm test`
+## Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+learn/
+  backend/           # Backend server code (Node.js/Bun)
+  public/            # Static assets for frontend
+  src/               # React frontend source code
+    components/      # React components
+  tailwind.config.js # Tailwind CSS configuration
+  postcss.config.js  # PostCSS configuration
+  package.json       # Project dependencies and scripts
+  tsconfig.json      # TypeScript configuration (if used)
+  .env               # Environment variables (not committed)
+```
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Node.js (v16+ recommended)
+- npm or Bun (for backend)
+- (Optional) Bun for backend: [Get Bun](https://bun.sh/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+1. **Clone the repository:**
+   ```sh
+   git clone <repo-url>
+   cd learn
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Install dependencies:**
+   ```sh
+   npm install
+   # or, if using Bun for backend:
+   cd backend
+   bun install
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Set up environment variables:**
+   - Copy `.env.example` to `.env` and fill in required values.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Running the Project
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Start the Frontend
 
-## Learn More
+```sh
+npm start
+```
+- The app will be available at [http://localhost:3000](http://localhost:3000).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Start the Backend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+cd backend
+node server.js
+# or, if using Bun:
+bun run server.js
+```
+- The backend will run on [http://localhost:3001](http://localhost:3001).
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Frontend
 
-### Analyzing the Bundle Size
+- React frontend (in `src/`)
+- Tailwind CSS for styling
+- Easy local development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Backend
 
-### Making a Progressive Web App
+- Node.js backend (in `backend/`)
+- Tailwind CSS for styling
+- Easy local development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Environment Variables
 
-### Advanced Configuration
+- `REACT_APP_API_URL`: URL for the frontend to communicate with the backend.
+- `REACT_APP_ALGOLIA_APP_ID`: Algolia application ID (if used).
+- `REACT_APP_ALGOLIA_SEARCH_API_KEY`: Algolia search API key (if used).
+- `REACT_APP_ALGOLIA_ADMIN_API_KEY`: Algolia admin API key (if used).
+- `PORT`: Port for the backend server (default: 3001).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Testing
 
-### Deployment
+- Frontend: `npm test`
+- Backend: `cd backend && bun test`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## License
 
-### `npm run build` fails to minify
+MIT License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+You can further customize this README with more details about your project, usage instructions, or contribution guidelines as needed. If you want this written to your `README.md`, let me know!
+
+**Happy coding!**
