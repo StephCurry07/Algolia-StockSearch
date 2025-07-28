@@ -1,12 +1,13 @@
 // App.js
 import React from "react";
-import StockSearchCustom from "./components/StockCustom";
+// import StockSearchCustom from "./components/StockCustom";
+import StockMCP from "./components/StockMCP";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-6">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-2 px-6">
       <div className="w-full">
-        <StockSearchCustom />
+        <StockMCP />
       </div>
     </div>
   );

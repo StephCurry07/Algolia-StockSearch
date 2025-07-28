@@ -8,12 +8,15 @@ import {
 import PriceInfo from "./PriceInfo";
 import ChartDisplay from "./ChartDisplay";
 import StockAnalysis from "./StockAnalysis";
+import StockMCP from "./StockMCP";
 import { Search, TrendingUp, BarChart3, Activity, Sparkles } from "lucide-react";
 
 
 const app_id = process.env.REACT_APP_ALGOLIA_CUSTOM_APP_ID;
 const API_KEY = process.env.REACT_APP_ALGOLIA_SEARCH_API_KEY;
 const searchClient = algoliasearch(app_id, API_KEY);
+
+
 
 const AutocompleteUI = ({ hits, currentRefinement, refine }) => {
   const [selectedSymbol, setSelectedSymbol] = useState("");
@@ -26,16 +29,34 @@ const AutocompleteUI = ({ hits, currentRefinement, refine }) => {
   useEffect(() => {
     if (!selectedSymbol) return;
 
+    const searchStocks = async (query) => {
+      const res = await fetch("http://localhost:3001/mcp/searchStocks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query }),
+      });
+      return res.json();
+    };
+
+    const analyzeStock = async (symbol) => {
+      const res = await fetch("http://localhost:3001/mcp/analyzeStock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ symbol }),
+      });
+      return res.json();
+    };
+
     const fetchPrice = async () => {
       setPriceLoading(true);
       try {
         console.log(`Fetching price for ${selectedSymbol}`);
-        const res = await fetch(`http://localhost:3001/api/price/${selectedSymbol}`);
-        
+        // const res = await fetch(`http://localhost:3001/api/price?symbol=${selectedSymbol}`);
+        const res = await fetch(`http://localhost:3001/api/price-twelve?symbol=${selectedSymbol}&interval=1week`);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
-        
+
         const data = await res.json();
         setPriceData(data);
       } catch (err) {
@@ -97,7 +118,7 @@ const AutocompleteUI = ({ hits, currentRefinement, refine }) => {
         {/* Search Section */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-slate-900 mb-4">
-            Discover Your Next 
+            Discover Your Next
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600"> Investment</span>
           </h2>
           <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
@@ -106,13 +127,11 @@ const AutocompleteUI = ({ hits, currentRefinement, refine }) => {
 
           {/* Enhanced Search Input */}
           <div className="relative max-w-2xl mx-auto mb-8">
-            <div className={`relative transition-all duration-300 ${
-              isSearchFocused ? 'transform scale-105' : ''
-            }`}>
+            <div className={`relative transition-all duration-300 ${isSearchFocused ? 'transform scale-105' : ''
+              }`}>
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Search className={`h-5 w-5 transition-colors duration-200 ${
-                  isSearchFocused ? 'text-blue-500' : 'text-slate-400'
-                }`} />
+                <Search className={`h-5 w-5 transition-colors duration-200 ${isSearchFocused ? 'text-blue-500' : 'text-slate-400'
+                  }`} />
               </div>
               <input
                 type="search"
@@ -269,6 +288,7 @@ const AutocompleteUI = ({ hits, currentRefinement, refine }) => {
             </div>
           </div>
         )}
+        <StockMCP />
       </div>
     </div>
   );
